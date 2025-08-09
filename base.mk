@@ -38,11 +38,11 @@ QSD8K_BOARD_PLATFORMS := qsd8k
 
 TARGET_USE_VENDOR_CAMERA_EXT := true
 
-ifeq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
-BOARD_HAVE_QCOM_FM ?= false
+ifeq ($(TARGET_QCOM_IOT_LOW_RAM), true)
+BOARD_HAVE_QCOM_FM := false
 else
 BOARD_HAVE_QCOM_FM ?= true
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 
 #Camera QC extends API
 #ifeq ($(strip $(TARGET_USES_QTIC_EXTENSION)),true)
@@ -785,9 +785,10 @@ PRODUCT_PACKAGES := \
     Updater \
     SyncProvider \
     IM \
+    SnapdragonGallery \
     SnapdragonLauncher
 
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PACKAGES += \
     DeskClock \
     Calculator \
@@ -800,7 +801,7 @@ PRODUCT_PACKAGES += \
     SoundRecorder \
     SnapdragonGallery \
     VideoEditor
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 
 ifeq ($(TARGET_HAS_LOW_RAM),true)
     DELAUN := Launcher3QuickStepGo
@@ -887,9 +888,9 @@ PRODUCT_PACKAGES += $(SENSORS_HARDWARE)
 PRODUCT_PACKAGES += $(STMLOG)
 PRODUCT_PACKAGES += $(THERMAL_HAL)
 PRODUCT_PACKAGES += $(TSLIB_EXTERNAL)
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS),true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM),true)
 PRODUCT_PACKAGES += $(VR_HAL)
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 PRODUCT_PACKAGES += $(QRGND)
 PRODUCT_PACKAGES += $(UPDATER)
 PRODUCT_PACKAGES += $(WPA)

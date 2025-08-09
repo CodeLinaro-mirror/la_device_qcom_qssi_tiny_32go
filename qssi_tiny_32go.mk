@@ -13,14 +13,17 @@ ifeq ($(TARGET_QCOM_IOT), true)
 #Enable low RAM optimizations
 TARGET_QCOM_IOT_LOW_RAM := true
 TARGET_HAS_QTI_OPTIMIZATIONS := true
+
 include device/qcom/iot-feature-config/iotfeatureconfig.mk
 
-endif #TARGET_QCOM_IOT
+endif
 
 #To be moved to iot-feature-config
-ifeq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifeq ($(TARGET_QCOM_IOT_LOW_RAM), true)
+
 TARGET_TELEPHONY_DATA_ONLY := true
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+
+endif
 
 # Skip VINTF checks for kernel configs since we do not have kernel source
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
@@ -153,14 +156,14 @@ TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/qssi_tiny_32go/common.mk)
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PROPERTY_OVERRIDES  += \
-	dalvik.vm.heapstartsize=8m \
-	dalvik.vm.heapsize=512m \
-	dalvik.vm.heaptargetutilization=0.75 \
-	dalvik.vm.heapminfree=512k \
-	dalvik.vm.heapmaxfree=8m
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+     dalvik.vm.heapstartsize=8m \
+     dalvik.vm.heapsize=512m \
+     dalvik.vm.heaptargetutilization=0.75 \
+     dalvik.vm.heapminfree=512k \
+     dalvik.vm.heapmaxfree=8m
+endif
 
 PRODUCT_NAME := $(VENDOR_QTI_DEVICE)
 PRODUCT_DEVICE := $(VENDOR_QTI_DEVICE)
@@ -174,9 +177,9 @@ TARGET_USES_AOSP := false
 TARGET_USES_AOSP_FOR_AUDIO := false
 TARGET_USES_QCOM_BSP := false
 
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 TARGET_USES_NQ_NFC := true
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
@@ -191,9 +194,9 @@ PRODUCT_PACKAGES += telephony-ext
 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
 
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 TARGET_SYSTEM_PROP += device/qcom/qssi_tiny_32go/system.prop
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 
 TARGET_DISABLE_DASH := true
 TARGET_DISABLE_QTI_VPP := true
@@ -264,22 +267,23 @@ PRODUCT_PACKAGES += \
     android.hardware.contexthub@1.0-service
 
 # system prop for enabling QFS (QTI Fingerprint Solution)
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qfp=true
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
+
 
 # USB default HAL
 PRODUCT_PACKAGES += \
     android.hardware.usb@1.0-service
 
 #PASR HAL and APP
-ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PACKAGES += \
     vendor.qti.power.pasrmanager@1.0-service \
     vendor.qti.power.pasrmanager@1.0-impl \
     pasrservice
-endif #TARGET_HAS_QTI_OPTIMIZATIONS
+endif
 
 # Kernel modules install path
 KERNEL_MODULES_INSTALL := dlkm
