@@ -222,7 +222,12 @@ PRODUCT_PACKAGES += \
     libhealthd.msm
 
 DEVICE_FRAMEWORK_MANIFEST_FILE := device/qcom/qssi_tiny_32go/framework_manifest.xml
+
+ifneq ($(TARGET_HAS_QTI_OPTIMIZATIONS), true)
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
+else
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix_opt.xml
+endif #TARGET_HAS_QTI_OPTIMIZATIONS
 
 #audio related module
 PRODUCT_PACKAGES += libvolumelistener
