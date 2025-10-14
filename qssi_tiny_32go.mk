@@ -28,10 +28,6 @@ endif
 # Skip VINTF checks for kernel configs since we do not have kernel source
 PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
 
-# Enable product partition Native I/F. It is automatically set to current if
-# the shipping API level for the target is greater than 29.
-PRODUCT_PRODUCT_VNDK_VERSION := current
-
 # Mismatch in the uses-library tags between build system and the manifest leads
 # to soong APK manifest_check tool errors. Enable the flag to fix this.
 RELAX_USES_LIBRARY_CHECK := true
@@ -179,7 +175,7 @@ PRODUCT_DEVICE := $(VENDOR_QTI_DEVICE)
 PRODUCT_BRAND := qti
 PRODUCT_MODEL := qssi system image for arm64
 
-PRODUCT_EXTRA_VNDK_VERSIONS := 30 33
+PRODUCT_EXTRA_VNDK_VERSIONS := 30 33 34
 
 #Initial bringup flags
 TARGET_USES_AOSP := false
@@ -195,6 +191,8 @@ endif #TARGET_QCOM_IOT_LOW_RAM
 # default is nosdcard, S/W button enabled in resource
 PRODUCT_CHARACTERISTICS := nosdcard
 BOARD_FRP_PARTITION_NAME := frp
+
+PRODUCT_PACKAGES += qspa_system.rc qspa_default.rc
 
 #Android EGL implementation
 PRODUCT_PACKAGES += libGLES_android
@@ -312,9 +310,6 @@ endif
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PRODUCT_VENDOR_MOVE_ENABLED := true
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE := true
-
-#Enable vndk-sp Libraries
-PRODUCT_PACKAGES += vndk_package
 
 PRODUCT_COMPATIBLE_PROPERTY_OVERRIDE:=true
 

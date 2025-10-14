@@ -185,7 +185,7 @@ TINY_ALSA_TEST_APPS := tinyplay
 TINY_ALSA_TEST_APPS += tinycap
 TINY_ALSA_TEST_APPS += tinymix
 TINY_ALSA_TEST_APPS += tinypcminfo
-TINY_ALSA_TEST_APPS += cplay
+#TINY_ALSA_TEST_APPS += cplay
 
 #AMPLOADER
 AMPLOADER := amploader
@@ -734,7 +734,6 @@ WPA += hs20-osu-client
 #ZLIB
 ZLIB := gzip
 ZLIB += libunz
-ZLIB_HOST := minigzip
 
 #Charger
 CHARGER := charger
@@ -894,14 +893,12 @@ PRODUCT_PACKAGES += $(QRGND)
 PRODUCT_PACKAGES += $(UPDATER)
 PRODUCT_PACKAGES += $(WPA)
 PRODUCT_PACKAGES += $(ZLIB)
-PRODUCT_HOST_PACKAGES += $(ZLIB_HOST)
 PRODUCT_PACKAGES += $(VT_JNI)
 PRODUCT_PACKAGES += $(VT_QTI_PERMISSIONS)
 PRODUCT_PACKAGES += $(CRDA)
 PRODUCT_PACKAGES += $(WLAN)
 PRODUCT_PACKAGES += $(FD_LEAK)
 
-PRODUCT_PACKAGES += move_wifi_data.sh
 PRODUCT_PACKAGES += librs_jni
 PRODUCT_PACKAGES += libion
 
@@ -957,11 +954,6 @@ endif
 # OEM Unlock reporting
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.oem_unlock_supported=1
-
-
-# VNDK-SP:
-PRODUCT_PACKAGES += \
-    vndk-sp \
 
 TARGET_FS_CONFIG_GEN := device/qcom/qssi_tiny_32go/config.fs
 ifeq ($(TARGET_HAS_LOW_RAM),true)
