@@ -156,13 +156,20 @@ TARGET_DEFINES_DALVIK_HEAP := true
 $(call inherit-product, device/qcom/qssi_tiny_32go/common.mk)
 
 #Inherit all except heap growth limit from phone-xhdpi-2048-dalvik-heap.mk
-ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PROPERTY_OVERRIDES  += \
      dalvik.vm.heapstartsize=8m \
+     dalvik.vm.heapminfree=512k
+
+ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
+PRODUCT_PROPERTY_OVERRIDES  += \
      dalvik.vm.heapsize=512m \
      dalvik.vm.heaptargetutilization=0.75 \
-     dalvik.vm.heapminfree=512k \
      dalvik.vm.heapmaxfree=8m
+else
+PRODUCT_PROPERTY_OVERRIDES  += \
+     dalvik.vm.heapsize=256m \
+     dalvik.vm.heaptargetutilization=0.85 \
+     dalvik.vm.heapmaxfree=6m
 endif
 
 PRODUCT_NAME := $(VENDOR_QTI_DEVICE)
@@ -179,6 +186,8 @@ TARGET_USES_QCOM_BSP := false
 
 ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 TARGET_USES_NQ_NFC := true
+else
+TARGET_USES_NQ_NFC := false
 endif
 
 # default is nosdcard, S/W button enabled in resource
@@ -194,9 +203,7 @@ PRODUCT_PACKAGES += telephony-ext
 
 TARGET_ENABLE_QC_AV_ENHANCEMENTS := false
 
-ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 TARGET_SYSTEM_PROP += device/qcom/qssi_tiny_32go/system.prop
-endif
 
 TARGET_DISABLE_DASH := true
 TARGET_DISABLE_QTI_VPP := true
@@ -270,6 +277,8 @@ PRODUCT_PACKAGES += \
 ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.vendor.qfp=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.vendor.qfp=false
 endif
 
 

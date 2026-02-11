@@ -785,7 +785,6 @@ PRODUCT_PACKAGES := \
     Updater \
     SyncProvider \
     IM \
-    SnapdragonGallery \
     SnapdragonLauncher
 
 ifneq ($(TARGET_QCOM_IOT_LOW_RAM), true)

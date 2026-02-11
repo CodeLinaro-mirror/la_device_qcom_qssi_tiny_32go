@@ -1,5 +1,5 @@
 #
-# system.prop for qssi_32go
+# system.prop for qssi_tiny_32go
 #
 
 rild.libpath=/vendor/lib64/libril-qc-hal-qmi.so
@@ -88,7 +88,7 @@ persist.data.df.iwlan_mux=9
 persist.data.df.dev_name=rmnet_usb0
 
 #property to enable user to access Google WFD settings
-persist.debug.wfd.enable=1
+persist.debug.wfd.enable=0
 ##property to choose between virtual/external wfd display
 persist.sys.wfd.virtual=0
 
@@ -158,3 +158,13 @@ debug.stagefright.ccodec=1
 
 #Proprty to set native recorder's maximum base layer fps
 ro.media.recorder-max-base-layer-fps = 60
+
+# ro.product.memopt.enable for qti optimization.
+ro.product.memopt.enable=1
+
+#Disable IOP
+ro.vendor.qti.sys.fw.bg_apps_limit=4
+vendor.iop.enable_uxe=0
+vendor.perf.iop_v3.enable=false
+persist.rcs.supported=0
+vendor.perf.workloadclassifier.enable=false
