@@ -38,6 +38,9 @@ SYSTEMEXT_SEPARATE_PARTITION_ENABLE ?= false
 #Go variant flag
 TARGET_HAS_LOW_RAM := true
 
+# Set target supports go variant flag
+TARGET_SUPPORTS_GO_VARIANT := true
+
 TARGET_SYSTEM_PROP := device/qcom/qssi_tiny_32go/system.prop
 
 # Enable DM file preopting to reduce first boot time
