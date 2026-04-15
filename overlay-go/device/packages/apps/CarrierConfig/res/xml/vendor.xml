@@ -49,7 +49,7 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
         <boolean name="allow_adding_apns_bool" value="true" />
         <boolean name="hide_preferred_network_type_bool" value="false" />
         <boolean name="show_cdma_choices_bool" value="true" />
-        <boolean name="allow_video_call_in_low_battery" value="true" />
+        <boolean name="allow_video_call_in_low_battery_bool" value="true" />
         <boolean name="config_enable_display_14digit_imei" value="false" />
         <!-- Determines whether UI extensions for video calls should be used or not -->
         <boolean name="video_call_use_ext" value="true" />
@@ -1202,18 +1202,18 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.-->
 
     <carrier_config mcc="450" mnc="05">
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="allow_video_call_in_low_battery" value="false" />
+        <boolean name="allow_video_call_in_low_battery_bool" value="false" />
         <boolean name="config_carrier_cs_retry_available" value="true" />
     </carrier_config>
 
     <carrier_config mcc="450" mnc="06">
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="allow_video_call_in_low_battery" value="false" />
+        <boolean name="allow_video_call_in_low_battery_bool" value="false" />
     </carrier_config>
 
     <carrier_config mcc="450" mnc="08">
         <boolean name="carrier_vt_available_bool" value="true" />
-        <boolean name="allow_video_call_in_low_battery" value="false" />
+        <boolean name="allow_video_call_in_low_battery_bool" value="false" />
         <boolean name="config_carrier_cs_retry_available" value="true" />
     </carrier_config>
 
