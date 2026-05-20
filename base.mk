@@ -38,7 +38,11 @@ QSD8K_BOARD_PLATFORMS := qsd8k
 
 TARGET_USE_VENDOR_CAMERA_EXT := true
 
+ifeq ($(TARGET_IS_QLMD), true)
+BOARD_HAVE_QCOM_FM := false
+else
 BOARD_HAVE_QCOM_FM ?= true
+endif #TARGET_IS_QLMD
 
 #Camera QC extends API
 #ifeq ($(strip $(TARGET_USES_QTIC_EXTENSION)),true)
@@ -766,35 +770,43 @@ FD_LEAK := libc_leak_detector
 
 PRODUCT_PACKAGES := \
     AccountAndSyncSettings \
-    DeskClock \
     AlarmProvider \
-    Calculator \
-    Calendar \
     Camera \
     CertInstaller \
     DrmProvider \
-    Email \
-    Gallery2 \
-    LatinIME \
-    Music \
     netutils-wrapper-1.0 \
     Provision \
     Protips \
-    QuickSearchBox \
     Settings \
     Sync \
     SystemUI \
     Updater \
-    CalendarProvider \
     SyncProvider \
-    SoundRecorder \
     IM \
-    SnapdragonGallery \
-    VideoEditor \
     SnapdragonLauncher
 
+ifneq ($(TARGET_IS_QLMD), true)
+PRODUCT_PACKAGES += \
+    DeskClock \
+    Calculator \
+    Calendar \
+    Email \
+    Gallery2 \
+    LatinIME \
+    Music \
+    QuickSearchBox \
+    CalendarProvider \
+    SoundRecorder \
+    SnapdragonGallery \
+    VideoEditor
+endif #TARGET_IS_QLMD
+
 ifeq ($(TARGET_HAS_LOW_RAM),true)
+ifneq ($(TARGET_IS_QLMD), true)
+    DELAUN := Launcher3Go
+else
     DELAUN := Launcher3QuickStepGo
+endif #TARGET_IS_QLMD
 else
     # Live Wallpapers
     PRODUCT_PACKAGES += \
@@ -803,7 +815,7 @@ else
             VisualizationWallpapers
 
     DELAUN := Launcher3
-endif
+endif #TARGET_HAS_LOW_RAM
 
 PRODUCT_PACKAGES += $(ALSA_HARDWARE)
 PRODUCT_PACKAGES += $(ALSA_UCM)
@@ -878,7 +890,9 @@ PRODUCT_PACKAGES += $(SENSORS_HARDWARE)
 PRODUCT_PACKAGES += $(STMLOG)
 PRODUCT_PACKAGES += $(THERMAL_HAL)
 PRODUCT_PACKAGES += $(TSLIB_EXTERNAL)
+ifneq ($(TARGET_IS_QLMD),true)
 PRODUCT_PACKAGES += $(VR_HAL)
+endif #TARGET_IS_QLMD
 PRODUCT_PACKAGES += $(QRGND)
 PRODUCT_PACKAGES += $(UPDATER)
 PRODUCT_PACKAGES += $(WPA)
