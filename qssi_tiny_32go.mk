@@ -103,9 +103,9 @@ PRODUCT_BUILD_PRODUCT_IMAGE := true
 PRODUCT_BUILD_SUPER_PARTITION := false
 PRODUCT_BUILD_RAMDISK_IMAGE := true
 ifeq ($(SYSTEMEXT_SEPARATE_PARTITION_ENABLE), true)
-BOARD_AVB_VBMETA_SYSTEM := system system_ext product
+BOARD_AVB_VBMETA_SYSTEM := system system_ext product init_boot
 else
-BOARD_AVB_VBMETA_SYSTEM := system product
+BOARD_AVB_VBMETA_SYSTEM := system product init_boot
 endif
 BOARD_AVB_VBMETA_SYSTEM_KEY_PATH := external/avb/test/data/testkey_rsa2048.pem
 BOARD_AVB_VBMETA_SYSTEM_ALGORITHM := SHA256_RSA2048
@@ -296,10 +296,6 @@ endif
 # Enable support for APEX updates
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
-# Enable virtual A/B compression
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/android_t_baseline.mk)
-PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := gz
-
 ifeq ($(SYSTEMEXT_SEPARATE_PARTITION_ENABLE), false)
 PRODUCT_PACKAGES += \
     qti_skip_mount.cfg
@@ -307,8 +303,15 @@ endif
 
 # Include mainline components and QSSI whitelist
 ifeq (true,$(call math_gt_or_eq,$(SHIPPING_API_LEVEL),29))
-  PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := true
+  PRODUCT_ENFORCE_ARTIFACT_PATH_REQUIREMENTS := relaxed
 endif
+
+# Include generic_ramdisk.mk to package snapuserd in generic ramdisk
+$(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
+
+# Enable virtual A/B compression
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/vabc_features.mk)
+PRODUCT_VIRTUAL_AB_COMPRESSION_METHOD := lz4
 
 # Enable allowlist for some aosp packages that should not be scanned in a "stopped" state
 # Some CTS test case failed after enabling feature config_stopSystemPackagesByDefault
