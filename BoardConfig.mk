@@ -22,6 +22,9 @@ TARGET_CPU_VARIANT := cortex-a9
 TARGET_HW_DISK_ENCRYPTION := true
 TARGET_HW_DISK_ENCRYPTION_PERF := true
 
+# create symlink system/lib/modules -> system_dlkm/lib/modules
+CREATE_SYSTEM_DLKM_SYMLINK := true
+
 ##############################Go configs###########################################
 MALLOC_SVELTE := true
 #########################End of Go configs########################################
