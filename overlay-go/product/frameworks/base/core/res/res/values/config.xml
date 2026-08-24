@@ -78,6 +78,45 @@
     <!-- Configure 16-bit task snapshots -->
     <bool name="config_use16BitTaskSnapshotPixelFormat">true</bool>
 
+    <!--  If true, jobs from background user will be restricted  -->
+    <bool name="config_jobSchedulerRestrictBackgroundUser">true</bool>
+    <!--  The number of the max cached processes in the system.
+         We only want to change this if our CPU is limited; that's not
+         the case with all Android Go devices, but it is for a lot of them.  -->
+    <integer name="config_customizedMaxCachedProcesses">32</integer>
+    <!--  Whether app hibernation deletes OAT artifact files as part of global hibernation  -->
+    <bool name="config_hibernationDeletesOatArtifactsEnabled">false</bool>
+    <!--  Launcher Go customization requires AppWidgetService, but otherwise
+         home screen widgets are not supported  -->
+    <bool name="config_enableAppWidgetService">true</bool>
+    <!--  Default list of files pinned by the Pinner Service  -->
+    <string-array translatable="false" name="config_defaultPinnerServiceFiles">
+        <item>"/apex/com.android.conscrypt/lib/libjavacrypto.so"</item>
+        <item>"/system/lib/libhidltransport.so"</item>
+        <item>"/system/framework/arm/boot-core-libart.oat"</item>
+        <item>"/system/framework/arm/boot-core-libart.vdex"</item>
+        <item>"/system/framework/arm/boot-ext.vdex"</item>
+        <item>"/system/framework/arm/boot.vdex"</item>
+        <item>"/system/framework/arm/boot-framework.vdex"</item>
+    </string-array>
+    <!--  Bytes that the PinnerService pins for the Home app.  -->
+    <integer name="config_pinnerHomePinBytes">0</integer>
+    <!--  Maximum number of supported users; must be 2 or greater users for
+    Guest mode switching; 2 is recommended  -->
+    <integer name="config_multiuserMaximumUsers">2</integer>
+    <!--  Whether Multiuser UI should be shown  -->
+    <bool name="config_enableMultiUserUI">true</bool>
+    <!--  Set to true to enable the user switcher on the keyguard.  -->
+    <bool name="config_keyguardUserSwitcher">true</bool>
+    <!--  If true, show multiuser switcher by default unless the user specifically disables it  -->
+    <bool name="config_showUserSwitcherByDefault">true</bool>
+    <!--  If true, all guest users created on the device will be ephemeral.  -->
+    <bool name="config_guestUserEphemeral">true</bool>
+    <!--  Whether device should always have a guest user available.  -->
+    <bool name="config_guestUserAutoCreated">true</bool>
+    <!--  Maximum number of users we allow to be running at a time -->
+    <integer name="config_multiuserMaxRunningUsers">1</integer>
+
     <!-- Whether to select voice/data/sms preference without user confirmation -->
     <bool name="config_voice_data_sms_auto_fallback">true</bool>
 

@@ -43,6 +43,7 @@ TARGET_KERNEL_DLKM_DISABLE := true
 -include $(QCPATH)/common/msmnile/BoardConfigVendor.mk
 
 USE_OPENGL_RENDERER := true
+MALLOC_LOW_MEMORY := true
 BOARD_USE_LEGACY_UI := true
 
 ifeq ($(ENABLE_AB), true)
