@@ -113,7 +113,7 @@
     <!--  If true, all guest users created on the device will be ephemeral.  -->
     <bool name="config_guestUserEphemeral">true</bool>
     <!--  Whether device should always have a guest user available.  -->
-    <bool name="config_guestUserAutoCreated">true</bool>
+    <bool name="config_guestUserAutoCreated">false</bool>
     <!--  Maximum number of users we allow to be running at a time -->
     <integer name="config_multiuserMaxRunningUsers">1</integer>
 
