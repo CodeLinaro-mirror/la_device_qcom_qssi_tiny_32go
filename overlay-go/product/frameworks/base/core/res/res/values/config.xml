@@ -52,7 +52,7 @@
     <bool name="config_dynamic_bind_ims">true</bool>
 
     <!-- The name of the package that will hold the dialer role by default. -->
-    <string name="config_defaultDialer" translatable="false">org.codeaurora.dialer</string>
+    <!--string name="config_defaultDialer" translatable="false">org.codeaurora.dialer</string-->
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          bluetooth interfaces.  If the device doesn't want to support tethering over bluetooth this
          should be empty. -->
